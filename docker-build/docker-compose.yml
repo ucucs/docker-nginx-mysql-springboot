@@ -16,10 +16,10 @@ services: # 用来表示compose需要启动的服务
       - ./data/redis/:/data/
       - ./log/redis/:/var/log/redis/
     command: # 表示以这个命令来启动服务
-      /bin/bash -c "echo 511 > /proc/sys/net/core/somaxconn
+      /bin/bash -c "sysctl -w net.core.somaxconn=65535
       && echo never > /sys/kernel/mm/transparent_hugepage/enabled
       && echo never > /sys/kernel/mm/transparent_hugepage/defrag
-      && redis-server /usr/local/etc/redis/redis.conf"
+      && redis-server /usr/local/etc/redis/redis.conf --appendonly yes"
     deploy: # 需要用命令才生效 docker stack deploy --compose-file docker-compose.yml
       replicas: 1 # 部署副本数量
       update_config: # 升级回滚控制
