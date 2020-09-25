@@ -7,8 +7,8 @@ services: # 用来表示compose需要启动的服务
     restart: always # 配置重启，表示如果服务启动不成功会一直尝试
     environment: # 环境变量定义
       - author=ucucs
-    ports: # 端口映射,外部访问的端口 不同端口可以如此配置 6379:6380
-      - "6379"
+    ports: # 端口映射,外部访问的端口 不同端口可以如此配置 6379:6380,单独写代表随机端口
+      - "6379:6379"
     networks: # 网络网段定义
       - frontend
     volumes: # 加载本地目录下的配置文件到容器目标地址下
