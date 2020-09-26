@@ -43,3 +43,11 @@ networks: # 网络定义
 ```
 docker-compose up 启动
 ```
+
+# 环境变量配置
+```
+使用.env文件进行配置
+
+compose里格式如下,设置默认值
+环境变量${VARIABLE:-default}引用
+```

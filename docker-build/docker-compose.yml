@@ -1,4 +1,4 @@
-version: "3" # 指定 docker-compose.yml 文件的写法格式
+version: "3.8" # 指定 docker-compose.yml 文件的写法格式
 services: # 用来表示compose需要启动的服务 本文件从.env文件读取变量
 
   redis: # 自定义服务名
@@ -13,7 +13,7 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
     networks: # 网络网段定义
       - frontend
     volumes: # 加载本地目录下的配置文件到容器目标地址下
-      - ${REDIS_CNF:.-/config/redis/redis.conf}:/usr/local/etc/redis/redis.conf
+      - ${REDIS_CNF:-./config/redis/redis.conf}:/usr/local/etc/redis/redis.conf
       - ${REDIS_DATA:-./data/redis/}:/data/
       - ${REDIS_LOG:-./log/redis/}:/var/log/redis/
     command: # 表示以这个命令来启动服务
