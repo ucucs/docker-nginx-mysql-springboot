@@ -44,6 +44,7 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
     volumes:
       - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./data/mysql/:/var/lib/mysql/
+      - ./data/mysql-init/:/docker-entrypoint-initdb.d/
       - ./log/mysql/:/var/log/mysql/
     entrypoint:
       bash -c "chown -R mysql:mysql /var/log/mysql && exec /entrypoint.sh mysqld"
