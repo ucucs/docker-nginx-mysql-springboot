@@ -32,7 +32,7 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-ucucs}
-      - MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST:-'%'}
+      - MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST:-%}
       - MYSQL_USER=${MYSQL_USER:-ucs}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-ucspwd}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-ucsdb}
