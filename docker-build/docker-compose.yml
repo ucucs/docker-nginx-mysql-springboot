@@ -38,11 +38,16 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
       - MYSQL_DATABASE=${MYSQL_DATABASE:-ucsdb}
     ports:
       - "3306:3306"
+    networks:
+      - backend
     volumes:
       - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./data/mysql/:/var/lib/mysql/
       - ./log/mysql/:/var/log/mysql/
+    entrypoint:
+      bash -c "chown -R mysql:mysql /var/log/mysql && exec /entrypoint.sh mysqld"
 
 networks: # 网络定义
   frontend: # 网络命名
     driver: bridge # 定义网络模式,默认时可忽略 bridge(默认) host none service:[service name] container:[container name/id]
+  backend:
