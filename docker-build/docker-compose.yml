@@ -31,6 +31,7 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
       - ./mysql.env
     environment:
       - TZ=Asia/Shanghai
+      - LANG=C.UTF-8
       - MYSQL_INITDB_SKIP_TZINFO=yes
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-ucucs}
       - MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST:-%}
