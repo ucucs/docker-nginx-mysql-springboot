@@ -70,6 +70,8 @@ myisam_repair_threads = 1
 interactive_timeout = 28800
 wait_timeout = 28800
 
+mysqlx = 0
+
 [mysqldump]
 quick
 max_allowed_packet = 500M
