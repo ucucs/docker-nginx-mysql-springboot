@@ -14,6 +14,9 @@ collation-server = utf8mb4_unicode_ci
 skip-character-set-client-handshake
 default-time_zone = '+8:00'
 
+# Mysql 8.0 Only
+default_authentication_plugin = mysql_native_password
+
 datadir = /var/lib/mysql
 log_error = /var/log/mysql/error.log
 slow_query_log_file = /var/log/mysql/slow.log
@@ -35,13 +38,10 @@ sort_buffer_size = 8M
 join_buffer_size = 8M
 key_buffer_size = 4M
 thread_cache_size = 8
-query_cache_type = 1
-query_cache_size = 8M
-query_cache_limit = 2M
 ft_min_word_len = 4
 log_bin = mysql-bin
 binlog_format = row
-expire_logs_days = 7
+binlog_expire_logs_seconds = 604800
 slow_query_log = 1
 long_query_time = 1
 performance_schema = 0

@@ -23,9 +23,9 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
       && echo never > /sys/kernel/mm/transparent_hugepage/defrag
       && redis-server /usr/local/etc/redis/redis.conf"
 
-  mysql:
-    container_name: mysql
-    image: mysql:8.0.21
+  mysql5:
+    container_name: mysql5
+    image: mysql:5.7.31
     restart: always
     env_file: # 读取指定的环境变量文件
       - ./mysql.env
@@ -43,6 +43,32 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
       - backend
     volumes:
       - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./data/mysql/:/var/lib/mysql/
+      - ./data/mysql-init/:/docker-entrypoint-initdb.d/
+      - ./log/mysql/:/var/log/mysql/
+    entrypoint:
+      bash -c "chown -R mysql:mysql /var/log/mysql && exec /entrypoint.sh mysqld"
+
+  mysql8:
+    container_name: mysql8
+    image: mysql:8.0.21
+    restart: always
+    env_file: # 读取指定的环境变量文件
+      - ./mysql.env
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=C.UTF-8
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-ucucs}
+      - MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST:-%}
+      - MYSQL_USER=${MYSQL_USER:-ucs}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-ucspwd}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-ucsdb}
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    volumes:
+      - ./config/mysql/my-8.0.cnf:/etc/mysql/conf.d/my.cnf
       - ./data/mysql/:/var/lib/mysql/
       - ./data/mysql-init/:/docker-entrypoint-initdb.d/
       - ./log/mysql/:/var/log/mysql/
