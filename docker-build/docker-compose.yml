@@ -25,14 +25,13 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
 
   mysql:
     container_name: mysql
-    image: mysql:5.7.31
+    image: mysql:8.0.21
     restart: always
     env_file: # 读取指定的环境变量文件
       - ./mysql.env
     environment:
       - TZ=Asia/Shanghai
       - LANG=C.UTF-8
-      - MYSQL_INITDB_SKIP_TZINFO=yes
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-ucucs}
       - MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST:-%}
       - MYSQL_USER=${MYSQL_USER:-ucs}

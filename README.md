@@ -51,3 +51,8 @@ docker-compose up 启动
 compose里格式如下,设置默认值
 环境变量${VARIABLE:-default}引用
 ```
+
+# Mysql查看binlog日志内容
+```
+mysqlbinlog --base64-output=decode-rows -v mysql-bin.000006
+```
