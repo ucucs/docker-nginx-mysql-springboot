@@ -50,6 +50,19 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
     entrypoint:
       bash -c "chown -R mysql:mysql /var/log/mysql && exec /entrypoint.sh mysqld"
 
+  nginx:
+    container_name: nginx
+    image: nginx:1.19.2
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "80:80"
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./data/nginx/:/usr/share/nginx/html/
+      - ./log/nginx/:/var/log/nginx/
+    restart: always
+
 networks: # 网络定义
   frontend: # 网络命名
     driver: bridge # 定义网络模式,默认时可忽略 bridge(默认) host none service:[service name] container:[container name/id]
