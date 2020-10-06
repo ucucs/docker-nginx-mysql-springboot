@@ -59,7 +59,7 @@ services: # 用来表示compose需要启动的服务 本文件从.env文件读�
       - "80:80"
     volumes:
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./config/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./config/nginx/vhost/:/etc/nginx/vhost/
       - ./data/nginx/:/usr/share/nginx/html/
       - ./log/nginx/:/var/log/nginx/
     restart: always
