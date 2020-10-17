@@ -1,0 +1,11 @@
+version: "3.8" # 指定 docker-compose.yml 文件的写法格式
+services: # 用来表示compose需要启动的服务 本文件从.env文件读取变量
+
+  helloApp:
+    container_name: helloV3
+    image: hello:v3
+    environment:
+      - TZ=Asia/Shanghai
+    build: . # 指定构建上下文
+    ports:
+      - "8080:8080"

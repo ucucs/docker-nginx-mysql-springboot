@@ -56,3 +56,25 @@ compose里格式如下,设置默认值
 ```
 mysqlbinlog --base64-output=decode-rows -v mysql-bin.000006
 ```
+
+# Dockerfile 解释
+```
+# FROM 它的父母是谁 基础镜像
+# MAINTAINER 作者 维护者姓名
+# RUN 执行命令
+# ENV 环境变量设置
+# ADD 往镜像添加文件
+# COPY 往镜像添加文件 会自动解压
+# WORKDIR 当前工作目录 CD进入某个目录
+# VOLUME 目录挂载
+# EXPOSE 暴露的端口
+# ENTRYPOINT 镜像入口 启动命令
+
+# 构建镜像执行命令
+# docker build -t hello:v2 .
+# hello:v2 镜像名和版本号 指令最后一个 . 是上下文路径
+
+# 运行镜像
+# docker run -d -p8080:8080 hello:v2
+# -p 端口映射
+```
