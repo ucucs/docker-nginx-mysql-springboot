@@ -5,13 +5,16 @@ VOLUME /tmp
 # 复制外部的JAR包到镜像内
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
+# 运行程序相关参数
+ENV JAVA_OPTS=""
+ENV APP_OPTS=""
 # 设置镜像的时区,避免出现8小时的误差
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # 暴露端口进行访问
 EXPOSE 8080
 # 镜像入口
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar $APP_OPTS" ]
 
 # FROM 它的父母是谁 基础镜像
 # MAINTAINER 作者 维护者姓名
